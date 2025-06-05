@@ -77,7 +77,7 @@
     <div class="forgot-container">
         <div class="hotel-image"></div>
         <div class="forgot-form">
-            <h1 class="forgot-title">Reset Password</h1>
+            <h1 class="forgot-title">Forget Password</h1>
             
             @if (session('status'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
