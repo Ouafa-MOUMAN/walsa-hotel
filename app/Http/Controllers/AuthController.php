@@ -25,35 +25,46 @@ class AuthController extends Controller
     /**
      * Gérer la demande de connexion
      */
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+   public function login(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-        // Check if admin credentials were provided
-        if ($credentials['email'] === $this->adminEmail && $credentials['password'] === $this->adminPassword) {
-            // Store admin status in session
-            $request->session()->put('is_admin', true);
-            return redirect()->route('admin.dashboard');
-        }
-
-        // Pour les utilisateurs normaux
-        if (Auth::guard('client')->attempt([
-            'email' => $credentials['email'],
-            'password' => $credentials['password'],
-        ])) {
-            $request->session()->regenerate();
-            $request->session()->put('is_admin', false);
-
-            return redirect()->route('client.dashboard');
-        }
-
-        return back()->withErrors([
-            'email' => 'Les identifiants fournis ne correspondent pas à nos enregistrements.',
-        ])->onlyInput('email');
+    // Check if admin credentials were provided
+    if ($credentials['email'] === $this->adminEmail && $credentials['password'] === $this->adminPassword) {
+        // Store admin status in session
+        $request->session()->put('is_admin', true);
+        return redirect()->route('admin.dashboard');
     }
+
+    // Pour les utilisateurs normaux
+    if (Auth::guard('client')->attempt([
+        'email' => $credentials['email'],
+        'password' => $credentials['password'],
+    ])) {
+        $request->session()->regenerate();
+        $request->session()->put('is_admin', false);
+
+        // Vérifier s'il y a une redirection vers une réservation
+        if ($request->has('room_id')) {
+            return redirect()->route('booking.create', ['room_id' => $request->room_id]);
+        }
+
+        // Vérifier s'il y a une URL de redirection dans la session
+        if ($request->session()->has('intended_url')) {
+            $intendedUrl = $request->session()->pull('intended_url');
+            return redirect($intendedUrl);
+        }
+
+        return redirect()->route('client.dashboard');
+    }
+
+    return back()->withErrors([
+        'email' => 'Les identifiants fournis ne correspondent pas à nos enregistrements.',
+    ])->onlyInput('email');
+}
 
     /**
      * Afficher le formulaire d'inscription

@@ -6,13 +6,10 @@
     <title>@yield('title', 'Grand Hotel Admin')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
     <style>
-        /* Styles personnalisés */
         body {
             overflow-x: hidden;
         }
-
         .sidebar {
             background-color: #ffffff;
             height: 100vh;
@@ -24,11 +21,9 @@
             left: 0;
             top: 60px;
         }
-
         .sidebar.collapsed {
             width: 50px;
         }
-
         .sidebar-item {
             padding: 10px;
             text-align: left;
@@ -41,30 +36,25 @@
             white-space: nowrap;
             overflow: hidden;
         }
-
         .sidebar-item:hover, .sidebar-item.active {
             background-color: #fcfcfc;
             color: #8b4513;
             text-decoration: none;
         }
-
         .sidebar-icon {
             font-size: 24px;
             margin-right: 10px;
             min-width: 24px;
             text-align: center;
         }
-
         .sidebar-text {
             transition: opacity 0.3s, visibility 0.3s;
         }
-
         .sidebar.collapsed .sidebar-text {
             opacity: 0;
             visibility: hidden;
             width: 0;
         }
-
         .main-content {
             margin-left: 200px;
             padding: 20px;
@@ -73,11 +63,9 @@
             transition: margin-left 0.3s ease;
             margin-top: 60px;
         }
-
         .main-content.expanded {
             margin-left: 50px;
         }
-
         .navbar {
             background-color: white;
             padding: 0.5rem 1rem;
@@ -88,20 +76,17 @@
             top: 0;
             height: 60px;
         }
-
         .navbar-container {
             display: flex;
             align-items: center;
             width: 100%;
         }
-
         .logo-container {
             display: flex;
             align-items: center;
             padding-right: 20px;
             flex-shrink: 0;
         }
-
         .navbar-content {
             flex-grow: 1;
             display: flex;
@@ -109,20 +94,10 @@
             align-items: center;
             margin-left: 20px;
         }
-
-        .logo {
-            height: 35px;
-            width: 35px;
-            background: linear-gradient(135deg, #8b4513, #d2691e);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
+        .logo-img {
+            height: 90px;
+            width: auto;
         }
-
         .profile-icon {
             width: 35px;
             height: 35px;
@@ -133,11 +108,9 @@
             align-items: center;
             justify-content: center;
         }
-
         .notification-badge {
             position: relative;
         }
-
         .badge-number {
             position: absolute;
             top: -5px;
@@ -152,7 +125,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .toggle-sidebar {
             cursor: pointer;
             font-size: 1.5rem;
@@ -164,19 +136,15 @@
             border-radius: 4px;
             transition: background-color 0.3s;
         }
-
         .toggle-sidebar:hover {
             background-color: #f8f9fa;
         }
-
         .brand-primary {
             color: #8b4513 !important;
         }
-
         .shadow-bottom {
             box-shadow: 0 6px 6px -2px rgba(139, 69, 19, 0.1);
         }
-
         @media (max-width: 767.98px) {
             .sidebar {
                 width: 70px;
@@ -198,13 +166,7 @@
         <div class="navbar-container">
             <div class="logo-container">
                 <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
-                    <div class="d-flex align-items-center">
-                        <div class="logo">H</div>
-                        <div class="ms-2">
-                            <span class="brand-primary fw-bold" style="font-size: 18px;">GRAND HOTEL</span>
-                            <span class="text-muted d-block" style="font-size: 12px;">ADMINISTRATION</span>
-                        </div>
-                    </div>
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="logo-img">
                 </a>
             </div>
 
@@ -219,29 +181,27 @@
                         <span class="badge-number">3</span>
                     </div>
                     <div class="d-flex align-items-center me-2 me-lg-3">
-                       <div class="dropdown">
-                                <div class="profile-icon mx-2 text-white fw-bold text-center"
-                                    id="profileDropdown"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    style="width: 35px; height: 35px; border-radius: 50%; line-height: 35px;">
-                                    A
-                                </div>
-
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                    <li class="dropdown-item">Hello Admin</li>
-                                    <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profil</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Paramètres</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item">
-                                                <i class="bi bi-box-arrow-right"></i> Déconnexion
-                                            </button>
-                                        </form>
-                                    </li>
-                                </ul>
+                        <div class="dropdown">
+                            <div class="profile-icon mx-2 text-white fw-bold text-center"
+                                 id="profileDropdown"
+                                 data-bs-toggle="dropdown"
+                                 aria-expanded="false">
+                                 A
+                            </div>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <li class="dropdown-item">Hello Admin</li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profil</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Paramètres</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bi bi-box-arrow-right"></i> Déconnexion
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -256,25 +216,13 @@
                 <i class="bi bi-house-door sidebar-icon"></i>
                 <span class="sidebar-text">Tableau de bord</span>
             </a>
-           
-            <a href="{{ route('admin.chambres.index') }}" class="sidebar-item {{ request()->routeIs('admin.chambres.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.rooms.index') }}" class="sidebar-item {{ request()->routeIs('admin.rooms.*') ? 'active' : '' }}">
                 <i class="bi bi-door-open sidebar-icon"></i>
                 <span class="sidebar-text">Gestion des chambres</span>
             </a>
-
-            <a href="{{ route('admin.reservations.index') }}" class="sidebar-item {{ request()->routeIs('admin.reservations.*') ? 'active' : '' }}">
-                <i class="bi bi-calendar-check sidebar-icon"></i>
-                <span class="sidebar-text">Réservations</span>
-            </a>
-
             <a href="{{ route('admin.clients.index') }}" class="sidebar-item {{ request()->routeIs('admin.clients.*') ? 'active' : '' }}">
                 <i class="bi bi-people sidebar-icon"></i>
                 <span class="sidebar-text">Clients</span>
-            </a>
-
-            <a href="{{ route('admin.admins.index') }}" class="sidebar-item {{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
-                <i class="bi bi-shield-lock sidebar-icon"></i>
-                <span class="sidebar-text">Gestion des admins</span>
             </a>
         </div>
     </div>
@@ -304,21 +252,16 @@
             const toggleSidebar = document.getElementById('toggleSidebar');
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('mainContent');
-
             let sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-
             if (sidebarCollapsed) {
                 sidebar.classList.add('collapsed');
                 mainContent.classList.add('expanded');
             }
-
             toggleSidebar.addEventListener('click', function() {
                 sidebar.classList.toggle('collapsed');
                 mainContent.classList.toggle('expanded');
-
                 sidebarCollapsed = sidebar.classList.contains('collapsed');
                 localStorage.setItem('sidebarCollapsed', sidebarCollapsed);
-
                 const toggleIcon = toggleSidebar.querySelector('i');
                 if (sidebarCollapsed) {
                     toggleIcon.classList.remove('bi-list');

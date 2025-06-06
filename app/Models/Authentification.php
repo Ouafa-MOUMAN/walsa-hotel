@@ -54,11 +54,33 @@ class Authentification extends Authenticatable
 
     /**
      * Get the password for the user.
+     * Cette méthode indique à Laravel quelle colonne utiliser pour le mot de passe
      *
      * @return string
      */
     public function getAuthPassword()
     {
         return $this->mot_de_passe;
+    }
+
+    /**
+     * Get the name of the unique identifier for the user.
+     * Cette méthode indique à Laravel quelle colonne utiliser comme identifiant unique
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return 'email';
+    }
+
+    /**
+     * Get the unique identifier for the user.
+     *
+     * @return mixed
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->email;
     }
 }
